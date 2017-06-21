@@ -1,0 +1,199 @@
+/* ========================================*/
+/*                 Body                    */
+/* ========================================*/
+     body{
+        background-image: url("../imgs/dark-denim-3.png");
+        background-size: 340px;
+             }
+
+
+       #map {
+        height: 500px;
+        width: 100%;
+        margin: 0 auto;
+               box-shadow: 0px 0px 25px 0px #1d9c3e;;
+       }
+/* ========================================*/
+/*                 Margins                 */
+/* ========================================*/
+
+       .margin_10{width:100%; height:10px;  }
+       .margin_30{width:100%; height:30px;}
+       .margin_100{width:100%;height:100px; }
+
+
+       #dni_loading{display:none;}
+
+        .header{
+        width: 100%; padding: 90px 10px 10px;
+        color: white; font-size: 50px;
+        border-bottom: 7px solid;
+        background-color: #449a5a; 
+            font-weight:500
+             }
+
+
+        #titulo_website{display: inline-block;}
+
+         #titulo_mapa{
+        text-align: center;
+        padding: 10px;
+        color: white;
+        font-size: 40px;
+        border-bottom: 7px solid;
+        background-color: #87be95;
+             }
+
+/* ========================================*/
+/*                Navigation               */
+/* ========================================*/
+         nav{
+             position: absolute;
+             right: 50px;
+             top: 20px;}
+             
+         nav ul {list-style-type:  none;}
+         nav ul li{
+                 display: inline-block;
+                padding: 16px;
+                font-size: 20px;
+                font-weight: 200;
+         }
+         nav ul li a{color: white;}
+         nav ul li a:hover{
+             border-bottom: 1px solid white;
+             color:white;
+             text-decoration: none;
+         }
+
+
+
+         #logo{ margin: 0 50px;}
+
+
+         .login{width: 100%;height: 30px;padding-top:7px;}
+
+         .login_options{
+            position: absolute;
+            width: 100%;
+            height: 30px;
+            right: 0;
+            text-align: right;
+         }
+
+         .login_option{
+             background-color: #c5573d;
+             font-size:17px;padding: 10px 20px 3px;
+              color: white;
+          }
+         #login_button{background-color: #449a5a; }
+
+         .credits{
+             width:100%;
+             background-color:grey;
+             text-align:center;
+             color:white;
+             padding:10px;
+         }
+         .footer{
+              width:100%;
+             background-color:#d34242;
+             text-align:center;
+             color:white;
+             padding:10px;
+         }
+         
+         button#donde_estoy{
+             background-color: #4c80ce;
+              color: white;
+              font-family: Arial;
+              padding: 15px;
+              border: none;
+              box-shadow: none;
+             width:100%;
+             white-space: nowrap;
+         }
+         a {color:white; font-weight:200;}
+         a:hover{color:white;}
+        
+             
+
+        @media (max-width:700px){
+                 #logo{margin-left: 45%;}
+                 #titulo_website{display: block;text-align: center;}
+                 nav ul li{font-size:17px;}
+             }
+             /*maybe use Open Sans for title
+             GENTIUM BASIC for body
+             MULI for body or title
+             
+             */
+
+
+/* ========================================*/
+/*                 Login Form              */
+/* ========================================*/
+             .login_container{
+              
+              padding:1em;
+              background-color: rgba(255,255,255, 0.76);
+              margin:2em 0;
+            border-radius: 10px;
+
+             }
+             #usuario, #contrasenha1, #correo, #contrasenha2, #nombres, #apellidos {
+              width:100%;
+              border:none;
+              height:40px;
+              padding:10px;
+                 padding-left:40px;
+             }
+             #usuario, #contrasenha1, #correo, #nombres, #apellidos{
+              border-bottom:1px solid rgba(128, 128, 128, 0.38);
+             }
+             .center{text-align:center;}
+
+            #form_login_button {
+                 background-color:#2e6bdd;
+              padding:10px;
+              color:white;
+              border: none;
+                 width:100%;
+                     font-size:1.3em;
+             }
+        
+        /*  Para poner los iconos dentro del form  */
+
+
+        /* enable absolute positioning */
+        .inner-addon { position: relative; }
+
+        /* style icon */
+        .inner-addon .glyphicon {
+          position: absolute;
+          padding: 10px;
+          pointer-events: none;
+        }
+
+        /* align icon */
+        .left-addon .glyphicon  { left:  20px;}
+        .right-addon .glyphicon { right: 20px;}
+
+        /* add padding  */
+        .left-addon input, .left-addon select  { padding-left:  30px; }
+        .right-addon input, .right-addon select{ padding-right: 30px; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
