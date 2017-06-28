@@ -3,11 +3,14 @@ package com.upc.tfap.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.upc.tfap.entity.UsuarioAuth;
 import com.upc.tfap.service.IEventService;
 import com.upc.tfap.util.Session;
 
@@ -20,9 +23,17 @@ public class HomeController {
 	
 	
 	@GetMapping("/")
-	public String index(Model model, HttpServletRequest request){
+	public String index(Model model){
 		model.addAttribute("eventos", ie.listar());
-		model.addAttribute("user", request.getSession().getAttribute("user"));
+		try{
+			UsuarioAuth user=(UsuarioAuth) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			model.addAttribute("user", user.getUsuario());
+			System.out.println(user.getAuthorities());
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		} 
+
 		return "home"; 
 	}
 	

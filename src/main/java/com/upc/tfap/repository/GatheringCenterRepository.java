@@ -13,5 +13,5 @@ public interface GatheringCenterRepository extends JpaRepository<GatheringCenter
 
 	public List<GatheringCenter> findAll();
 	
-	public List<GatheringCenter> findByEvent(int id);
+	public List<GatheringCenter> findByEvent(Event e);
 }

@@ -10,46 +10,41 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="rol")
+@Table(name="role")
 public class Rol {
 
 	@Id
 	@GeneratedValue
-	private Long id;
+	private Long id_role;
 	
-	private String role;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="iduser")
-	private User usuario;
 
+
+	private String name_role;
+	
 	
 	public Rol() {
 
 	}
-
-	public Long getId() {
-		return id;
+	public Long getId_role() {
+		return id_role;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+
+	public void setId_role(Long id_role) {
+		this.id_role = id_role;
 	}
 
-	public String getRole() {
-		return role;
+
+	public String getName_role() {
+		return name_role;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+
+	public void setName_role(String name_role) {
+		this.name_role = name_role;
 	}
 
-	public User getUsuario() {
-		return usuario;
-	}
 
-	public void setUsuario(User usuario) {
-		this.usuario = usuario;
-	}
 
 }

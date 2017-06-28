@@ -33,12 +33,17 @@
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
-			<h1 class="text-center">Lista de usuarios</h1>
+			<div class="panel panel-default" style="margin:10px">
+     
+          <div class="panel-heading">
+           
+				<h1 class="text-center panel-title">Tu lista de Usuarios</h1>
+		</div>
 			<div class="margin_30"></div>
 			<table class="table">
 				<thead>
 					<tr>
-					<th> ID </th> <th> Nombre </th> <th> DNI RUC </th> <th> TIpo </th> <th>Update </th><th> Borrar </th>
+					<th> ID </th> <th> Nombre </th> <th> DNI RUC </th> <th> Roles </th> <th>Update </th><th> Borrar </th>
 					</tr>
 				</thead>
 				<tbody>		
@@ -46,18 +51,19 @@
 			<td th:text="${p.id}"> </td>
 			<td th:text="${p.nombre}">  </td>
 			<td th:text="${p.dniruc}"> </td>
-			<td th:text="${p.tipo}"> </td>
-			<td><a th:href="${'/usuario/update' + p.id}" class="btn btn-primary">Edit</a></td>
-			<td><a th:href="${'/usuario/delete' + p.id}" class="btn btn-danger">Delete</a></td>
+			<td> <span th:each="rol:${p.getRol()}"><span th:text="${rol.name_role}"></span></span> </td>
+			<td><a th:href="${'/usuario/update/' + p.id}" class="btn btn-primary">Edit</a></td>
+			<td><a th:href="${'/usuario/delete/' + p.id}" class="btn btn-danger">Delete</a></td>
 			</tr>
 
 
 			</tbody>	
 			</table>
-
  			<p th:unless="${lista}">No hay usuarios</p>
+ 			</div>
 		</div>
 	</div>
+	     <div class="margin_100"></div>
 
 
 </div>

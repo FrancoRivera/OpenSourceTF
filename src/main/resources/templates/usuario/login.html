@@ -36,26 +36,33 @@
           <div class="col-md-10 center"><h1>Ingresa</h1></div>
         </div>
         <div class="margin_30"></div>
-        <form th:action="@{/usuario}" th:object="${user}" method="POST">
-        <input type="hidden" name="action" value ="login" />
+
+         <form th:action="@{/logincheck}" method="POST">
+          <!-- evitar algunas vulnerabilidades web -->
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
           <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10 inner-addon left-addon">
               <i class="glyphicon glyphicon-heart"></i>
-              <input class="form-control" type="text" id="usuario" placeholder="DNI / RUC" name="dniruc" th:field="*{dniruc}" required="requred" /></div>
+              <input class="form-control"type="text"  name="identity_number_person" id="usuario"placeholder="DNI / RUC"  required="required"/>
+              </div>
             </div>
           <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-10 inner-addon left-addon">
               <i class="glyphicon glyphicon-lock"></i>
-              <input class="form-control" type="password" id="contrasenha" name="pass"  th:field="*{password}" placeholder="Contraseña" required="required" />
+
+              <input class="form-control" type="password" name="password_person" id="password" placeholder="Password" required="required" />
             </div>
           </div>
              <div class="margin_30"></div>
              <div class="row">
             <div class="col-md-2"></div>
             <div class="col-md-8">
-              <span class="text-danger" th:text="${mensaje}"></span>
+              <span class="text-danger">
+              <div th:if="${error!=null}">Usuario o clave incorrectos<div th:text="${error}"></div></div>
+                <div th:if="${logout!=null}">Logout correcto</div>
+                </span>
             </div>
           </div>
           <div class="margin_30"></div>
@@ -65,7 +72,10 @@
               <button id="form_login_button">Ingresa</button>
             </div>
           </div>
+                
           </form>
+
+
             <div class="margin_30"></div>
              <div class="row center">
             <div class="col-md-1"></div>
@@ -98,33 +108,6 @@
 <script src="/js/parallax.min.js"></script>
       
       
-
-<script>
-            $('#parallax_1').parallax({imageSrc: 'dependencies/imgs/home_1.jpg'});</script>
-            <script>/*
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '702194593287386',
-      xfbml      : true,
-      version    : 'v2.9'
-    });
-    FB.AppEvents.logPageView();
-    
-    FB.getLoginStatus(function(response) {
-	    statusChangeCallback(response);
-	});
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-  
-  */
-</script>
   </body>
 </html>
 

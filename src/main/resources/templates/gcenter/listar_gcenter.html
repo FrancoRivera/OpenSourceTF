@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Lista de Centros de Acopio</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+</head>
+<body>
+
+
+
+<div th:replace="fragmentos/header::header"></div>
+
+
+<div class="margin_30"></div>
+<div class="margin_30"></div>
+<div class="container">
+
+
+
+<div class="panel panel-default" style="margin:10px">
+          <div class="panel-heading">
+				<h1 class="text-center panel-title">Tu lista de Centros de Acopio</h1>
+			</div>
+
+
+	<table class="table">
+	<thead>
+	<tr>
+	<th> ID </th> <th> Nombre </th> <th> Descripcion </th> <th>Evento </th><th> Coordenada 1 </th> <th> Coordenada 2 </th> <th> Borrar </th>
+	</tr>
+
+			<tr th:each="p:${lista}">
+			<td th:text="${p.id_gatherincenter}"> </td>
+			<td th:text="${p.nombre}"> </td>
+			<td th:text="${p.description}"> </td>
+			<td th:text="${p.event.nombre}"> </td>
+			<td th:text="${p.lattitude}"></td>
+			<td th:text="${p.longitude}"></td>
+			<td> <form action="gcenter" method="post"><input type="hidden" name="action" value="delete"><input type="hidden" name="gc_id" value="${p.id_gatheringcenter}"><button class="btn btn-danger">Borrar</button></form></td>
+			</tr>
+
+	</thead>
+	</table>
+	<p th:if="${lista==null}">No hay eventos</p>
+					
+</div>
+	
+	     <div class="margin_30"></div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <a href="gc/agregar"><button type="button" class="btn btn-primary form-control"> Agregar nuevo Centro de Acopio </button></a>
+		
+        </div>
+
+    </div>
+    	     <div class="margin_100"></div>
+
+	
+
+		</div>
+    
+<jsp:include page="footer.jsp" /> 
+ <script   src="https://code.jquery.com/jquery-3.2.1.slim.min.js"   integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="   crossorigin="anonymous"></script>
+<script src="js/holder.min.js"></script>
+      
+  </body>
+</html>
+

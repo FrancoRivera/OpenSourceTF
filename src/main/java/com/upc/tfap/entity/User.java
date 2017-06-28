@@ -1,19 +1,28 @@
 package com.upc.tfap.entity;
 
+import java.beans.Transient;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.upc.tfap.entity.Rol;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.*;
+
 @Entity
 @Table(name="Person")
-public class User {
+public class User{
 	
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +35,7 @@ public class User {
 		@Column(name="name_person")
 		private String nombre;
 		
-		@Column(name="apellido_person")
+		@Column(name="last_name_person")
 		private String apellido;
 		
 		@Column(name="img_person")
@@ -35,12 +44,20 @@ public class User {
 		@Column(name="password_person")
 		private String password;
 		
-		@Column(name="type_person")
-		private String tipo;
+		/*@Column(name="type_person")
+		private String tipo;*/
 		
 		@Column(name="email_person")
 		private String email;
+		
+		@OneToMany(mappedBy="usuario",fetch=FetchType.EAGER)
+		private List<RolUser> roluser = new ArrayList<RolUser>();
+		
 
+
+		@javax.persistence.Transient
+		private boolean enable = true;
+		
 		@OneToMany
 		private List<Event> events;
 		
@@ -74,8 +91,7 @@ public class User {
 		public void setDonations(List<Donation> donations) {
 			this.donations = donations;
 		}
-		public User(){
-			
+		public User() {
 		}
 		
 		public int getId() {
@@ -92,12 +108,13 @@ public class User {
 		public void setEmail(String email) {
 			this.email = email;
 		}
+		/*
 		public String getTipo() {
 			return tipo;
 		}
 		public void setTipo(String tipo) {
 			this.tipo = tipo;
-		}
+		}*/
 		public String getPassword() {
 			return password;
 		}
@@ -131,6 +148,33 @@ public class User {
 		public void setApellido(String apellido) {
 			this.apellido = apellido;
 		}
+		
+		public boolean isEnable() {
+			return enable;
+		}
+
+		public void setEnable(boolean enable) {
+			this.enable = enable;
+		}
+		public List<RolUser> getRoluser() {
+			return roluser;
+		}
+
+		public void setRoluser(List<RolUser> roluser) {
+			this.roluser = roluser;
+		}
+		
+		public List<Rol> getRol(){
+			List<Rol> aux = new ArrayList<Rol>();
+			for (RolUser i:getRoluser()){
+				aux.add(i.getRole());
+				
+			}
+			return aux;
+			
+		}
+
+
 
 		
 	}

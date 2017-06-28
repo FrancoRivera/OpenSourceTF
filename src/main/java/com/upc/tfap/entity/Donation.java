@@ -19,8 +19,7 @@ public class Donation {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id_donation;
 	
-	@Column(name="type_donation")
-	private String type;
+
 	@Column(name="description_donation")
 	private String description;
 	@Column(name="quantity_donation")
@@ -28,13 +27,13 @@ public class Donation {
 	@Column(name="creation_date_donation")
 	private Date dcreation;
 	@ManyToOne
-	@JoinColumn(name="id_gathering_center_donation")
+	@JoinColumn(name="id_gatheringcenter_donation")
 	private GatheringCenter gatheringcenter;
 	
 	//@ManyToOne(cascade = CascadeType.ALL)
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn(name="id_user_donation")
+	@JoinColumn(name="id_person_donation")
 	private User user;
 	
 	public Donation(){
@@ -60,12 +59,7 @@ public class Donation {
 	public void setId_donation(Long id_donation) {
 		this.id_donation = id_donation;
 	}
-	public String getType() {
-		return type;
-		}
-		public void setType(String type) {
-		this.type = type;
-	}
+
 	public String getDescription() {
 		return description;
 	}

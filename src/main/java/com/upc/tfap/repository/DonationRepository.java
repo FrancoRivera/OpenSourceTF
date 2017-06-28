@@ -16,10 +16,7 @@ import org.springframework.data.repository.CrudRepository;
 @Transactional
 public interface DonationRepository extends JpaRepository<Donation, Long>{
 
-	//findall, delete, save  esta en CRUDrepository como clase que la estamos extendiendo
-	//@Query(value = "call sp_listarDonation_all", nativeQuery = true)
-	//public List<Donation> findAlljoin();
-	
+
 	public List<Donation>findAll();
 	
 	@Modifying

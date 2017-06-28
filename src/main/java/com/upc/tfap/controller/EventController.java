@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,10 +18,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.upc.tfap.entity.Event;
 import com.upc.tfap.entity.User;
+import com.upc.tfap.entity.UsuarioAuth;
 import com.upc.tfap.service.IEventService;
 import com.upc.tfap.util.Session;
 
 @Controller
+@PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
 @RequestMapping("/eventos")
 public class EventController {
 	
@@ -28,34 +32,30 @@ public class EventController {
 	
 	@GetMapping(path={"/", ""})
 	public String findAll(Model model, HttpServletRequest request){
-		if (Session.get(request, "user") != null){
-			model.addAttribute("user", Session.get(request, "user")); 
-			model.addAttribute("eventos", es.findAll(((User) Session.get(request, "user")).getId())); 
-		}
-			return "eventos/listar_evento"; 
+		UsuarioAuth user=(UsuarioAuth) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("user", user.getUsuario());
+		model.addAttribute("eventos", es.findAll(user.getUsuario())); 
+		System.out.println(user.getAuthorities());
+		return "eventos/listar_evento"; 
 	}
 	
 	
 	@GetMapping("/agregar")
 	public String newEvent(Model model, HttpServletRequest request){
-		if (Session.get(request, "user") != null){
-			model.addAttribute("user", Session.get(request, "user")); 
-			model.addAttribute("evento",new Event());
-			return "eventos/ingresa_evento";
-		}
-		return "redirect:/eventos";
+		UsuarioAuth user=(UsuarioAuth) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("user", user.getUsuario());
+		model.addAttribute("evento",new Event());
+		return "eventos/ingresa_evento";
 	
 	}
 	
 	@PostMapping("/agregar")
 	public String newEvent(Event e, Model model, HttpServletRequest request){
-		if (Session.get(request, "user") != null){
-			model.addAttribute("user", Session.get(request, "user")); 
-			es.save(e);
-			return "redirect:/eventos";
-		}
+		UsuarioAuth user=(UsuarioAuth) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("user", user.getUsuario());
+		es.save(e);
 		return "redirect:/eventos";
-	
+
 	}
 
 	@GetMapping("/{id}")

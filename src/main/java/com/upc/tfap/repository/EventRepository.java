@@ -14,8 +14,8 @@ import com.upc.tfap.entity.User;
 
 public interface EventRepository extends JpaRepository<Event, Integer>{
 	 
-	@Query(value="call sp_list_Event_by_User(?1)", nativeQuery=true )
-	public Iterable<Event> findById_Donation(int id); 
+	//@Query(value="call sp_list_Event_by_User(?1)", nativeQuery=true )
+	public Iterable<Event> findByUser(User u); 
 
 	//@Query ("select * from Event e where e.name_event like ?1")
 	public List<Event> findByNombre(String name_event); 

@@ -17,25 +17,30 @@ public class GatheringCenter {
 	
 	@Column(name="description_gatheringcenter")
 	private String description;
-	@Column(name="nombre")
+	
+	@Column(name="name_gatheringcenter")
 	private	String nombre;
+	
 	@Column(name="img_gatheringcenter")
 	private	String image;
 	
 	
 	@ManyToOne
-	@JoinColumn(name="id_gathering_center_event")
+	@JoinColumn(name="id_event_gatheringcenter")
 	private Event event;
 	
 	@ManyToOne
-	@JoinColumn(name="id_user_gatheringcenter")
+	@JoinColumn(name="id_person_gatheringcenter")
 	private User user;
 	
 	@OneToMany
 	private List<Donation>donations;
 	
+	@Column(name="lattitude_gatherincenter")
 	private double lattitude;
-	private double altitude;
+	
+	@Column(name="longitude_gatherincenter")
+	private double longitude;
 	
 	public GatheringCenter(int id_gatheringcenter, String nombre) {
 		super();
@@ -66,11 +71,11 @@ public class GatheringCenter {
 	public void setLattitude(double lattitude) {
 		this.lattitude = lattitude;
 	}
-	public double getAltitude() {
-		return altitude;
+	public double getLongitude() {
+		return lattitude;
 	}
-	public void setAltitude1(double altitude) {
-		this.altitude = altitude;
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 	public String getNombre() {
 		return nombre;
@@ -105,7 +110,5 @@ public class GatheringCenter {
 	public void setDonations(List<Donation> donations) {
 		this.donations = donations;
 	}
-	public void setAltitude(double altitude) {
-		this.altitude = altitude;
-	}
+
 }

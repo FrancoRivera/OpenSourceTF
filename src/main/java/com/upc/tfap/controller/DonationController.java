@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,12 +25,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.upc.tfap.entity.Donation;
 import com.upc.tfap.entity.GatheringCenter;
 import com.upc.tfap.entity.User;
+import com.upc.tfap.entity.UsuarioAuth;
 import com.upc.tfap.service.IDonationService;
 import com.upc.tfap.service.IGatheringCenterService;
 import com.upc.tfap.service.IUserService;
 import com.upc.tfap.util.Session;
 
 @Controller
+@PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
 @RequestMapping("/donations")
 public class DonationController {
 	@Autowired
@@ -41,18 +45,14 @@ public class DonationController {
 	
 	@GetMapping(path={"/", ""})
 	public String listDonation(Model model, HttpServletRequest request){
-		User auxiliar = ((User)request.getSession().getAttribute("user"));
-		if (auxiliar != null){
-			model.addAttribute("user", auxiliar);
-			System.out.println("ESTE ES EL USUARIO: "+  auxiliar.getId() + " : " + auxiliar.getDniruc());
-			System.out.println("ESTE ES EL USUARIO: "+  auxiliar);
-			model.addAttribute("lista", ids.listarReal(auxiliar));
-		}
-		//@Enumerated(value=EnumType.String)
-		//@Temporal(TemoralType.Date)
+		
+		//para obtener el usuario autenticado
+		UsuarioAuth user=(UsuarioAuth) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("user", user.getUsuario());
+		
+		model.addAttribute("lista", ids.listarReal(user.getUsuario()));
 
-
-		return "listar_donacion";
+		return "donaciones/listar_donacion";
 	}
 	
 	
@@ -69,7 +69,7 @@ public class DonationController {
 			model.addAttribute("donation",new Donation());
 		}
 		model.addAttribute("lista",igcs.findAll());
-		return "ingresa_donacion";
+		return "donaciones/ingresa_donacion";
 	}
 	
 	@PostMapping("/save")

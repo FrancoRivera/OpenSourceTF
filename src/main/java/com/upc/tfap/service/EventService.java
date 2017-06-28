@@ -18,8 +18,8 @@ public class EventService implements IEventService {
 
 
 	@Override
-	public Iterable<Event> findAll(Integer user) {
-		return er.findById_Donation(user);
+	public Iterable<Event> findAll(User user) {
+		return er.findByUser(user);
 	}
 
 	@Override

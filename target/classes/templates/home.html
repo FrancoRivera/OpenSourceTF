@@ -17,7 +17,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-      <link rel="stylesheet" href="/css/style.css" >
+      <link rel="stylesheet" href="css/style.css" >
       <style type="text/css">
         
         #titulo_mapa {
@@ -146,16 +146,17 @@
           <div class="container">
             
             <div class="row">
-              <div class="col-md-2"></div>
-              <div class="col-md-8">
-                <a href="/usuario"><span id="login_button" class="login_option"><span class="glyphicon glyphicon-user"></span> Ingresa </span></a>
-
-            <a href="/usuario/registro"><span class="login_option"><span class="glyphicon glyphicon-edit"></span> <u>Registrate </u></span></a>
+              <div class="col-md-1"></div>
+              <div class="col-md-3">
+                <a href="/usuario"><span id="login_button" class="btn-success form-control"><span class="glyphicon glyphicon-user"></span> Ingresa </span></a>
               </div>
+              <div class="col-md-3">
+            <a href="/usuario/registro"><span class="btn-danger form-control"><span class="glyphicon glyphicon-edit"></span> <u>Registrate </u></span></a></div>
             </div>
+            <div class="margin_30"></div>
             <div class="row">
             <div class="col-md-2"></div>
-            <div class="col-md-8">   <div class="text-center btn btn-primary"><u><a href="#" id="closeOverlay">Cerrar</a></u></div></div>
+            <div class="col-md-4">   <div class="text-center btn btn-primary form-control" id="closeOverlay"><u><a href="#" >Cerrar</a></u></div></div>
            
             </div>
           </div>
@@ -268,22 +269,24 @@
     </script>
 
     <script>
+    /*
     var login_modal = true;
     var id = window.setInterval(function(){
 
-      if(login_modal) {logiign.click(); login_modal = false;}
+      if(login_modal) {$("#").click(); login_modal = false;}
       else window.clearInterval(id);
 
     }, 1000)
-
+*/
     $("#closeOverlay").click(function(){
       $(".login_dd").slideUp();
+      $("")
     }) 
 
     </script>
 
 	<script type="text/javascript">
-    	 $('#parallax_1').parallax({imageSrc: 'imgs/home_1.jpg'});
+    	 $('#parallax_1').parallax({imageSrc: '/imgs/home_1.jpg'});
      </script>
   </body>
 </html>
