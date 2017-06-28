@@ -24,7 +24,7 @@ public class EventService implements IEventService {
 
 	@Override
 	public void save(Event event) {
-		System.out.println(event.getUser().getId());
+		System.out.println(event);
 		er.save(event); 
 		
 	}

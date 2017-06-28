@@ -23,7 +23,7 @@ public interface EventRepository extends JpaRepository<Event, Integer>{
 	public Event findOne(Integer id);
 	
 	@Modifying
-	@Query (value="UPDATE `Event` SET `estado_event`='INA' WHERE `id_event`=?1", nativeQuery=true)
+	@Query (value="UPDATE `Event` SET `id_state_event`='0' WHERE `id_event`=?1", nativeQuery=true)
 	public void delete(Integer id);
 	
 	public List<Event> findAll(); 

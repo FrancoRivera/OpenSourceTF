@@ -35,6 +35,19 @@ public class GatheringCenterService implements IGatheringCenterService{
 		return gcr.findByEvent(evento);
 	}
 
+	@Override
+	public List<GatheringCenter> findByUser(User u) {
+		// TODO Auto-generated method stub
+		return gcr.findByUser(u);
+	}
+
+	@Override
+	public void save(GatheringCenter gc) {
+		// TODO Auto-generated method stub
+		gcr.save(gc);
+		
+	}
+
 	
   
 }

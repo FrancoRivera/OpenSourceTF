@@ -35,7 +35,8 @@ public class EventController {
 		UsuarioAuth user=(UsuarioAuth) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("user", user.getUsuario());
 		model.addAttribute("eventos", es.findAll(user.getUsuario())); 
-		System.out.println(user.getAuthorities());
+
+		
 		return "eventos/listar_evento"; 
 	}
 	
@@ -44,15 +45,15 @@ public class EventController {
 	public String newEvent(Model model, HttpServletRequest request){
 		UsuarioAuth user=(UsuarioAuth) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("user", user.getUsuario());
+		
 		model.addAttribute("evento",new Event());
+		
 		return "eventos/ingresa_evento";
 	
 	}
 	
 	@PostMapping("/agregar")
-	public String newEvent(Event e, Model model, HttpServletRequest request){
-		UsuarioAuth user=(UsuarioAuth) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		model.addAttribute("user", user.getUsuario());
+	public String newEvent(Event e, Model model){
 		es.save(e);
 		return "redirect:/eventos";
 
@@ -60,8 +61,13 @@ public class EventController {
 
 	@GetMapping("/{id}")
 	public String findOne(@PathVariable Integer id,Model model){
+		UsuarioAuth user=(UsuarioAuth) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("user", user.getUsuario());
+		
 		model.addAttribute("evento", es.findOne(id));
-		return "eventos/listar_evento";
+		
+		
+		return "eventos/ingresa_evento";
 	}
 	
 	@PostMapping("/search")

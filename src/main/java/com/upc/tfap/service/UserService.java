@@ -69,10 +69,7 @@ public class UserService implements IUserService {
 			
 			// Transformar los roles a autorities
 			authorities = buildAuthorities(usuario.getRol());
-			UsuarioAuth lus = buildUser(usuario, authorities);
-			System.out.println(lus.getPassword());
-			BCryptPasswordEncoder bp = new BCryptPasswordEncoder();
-			return lus;
+			return buildUser(usuario, authorities);
 
 		}
 

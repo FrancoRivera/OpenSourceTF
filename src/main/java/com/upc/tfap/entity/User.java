@@ -1,8 +1,7 @@
 package com.upc.tfap.entity;
 
-import java.beans.Transient;
 import java.util.ArrayList;
-import java.util.Collection;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,13 +11,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.upc.tfap.entity.Rol;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.*;
 
 @Entity
 @Table(name="Person")
@@ -52,8 +50,10 @@ public class User{
 		
 		@OneToMany(mappedBy="usuario",fetch=FetchType.EAGER)
 		private List<RolUser> roluser = new ArrayList<RolUser>();
-		
 
+		@ManyToOne
+		@JoinColumn(name="id_state_person")
+		private Status status; 
 
 		@javax.persistence.Transient
 		private boolean enable = true;
@@ -168,10 +168,17 @@ public class User{
 			List<Rol> aux = new ArrayList<Rol>();
 			for (RolUser i:getRoluser()){
 				aux.add(i.getRole());
-				
 			}
 			return aux;
 			
+		}
+		
+		public Status getStatus() {
+			return status;
+		}
+
+		public void setStatus(Status status) {
+			this.status = status;
 		}
 
 

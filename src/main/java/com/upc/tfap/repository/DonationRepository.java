@@ -20,8 +20,8 @@ public interface DonationRepository extends JpaRepository<Donation, Long>{
 	public List<Donation>findAll();
 	
 	@Modifying
-	@Query(value = "delete from donation where id_donation = ?1", nativeQuery = true)
-	public void delete(Long id);
+	@Query (value="UPDATE `Event` SET `id_state_donation`='0' WHERE `id_donation`=?1", nativeQuery=true)
+	public void delete(Integer id);
 	
 	
 	public Donation findOne(Long id);

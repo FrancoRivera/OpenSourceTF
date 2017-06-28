@@ -19,8 +19,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	@Query(value="call sp_loginUser(?1, ?2)", nativeQuery=true )
 	public User login(String user, String password);
-
-	public void delete(User u);
+	
+	@Modifying
+	@Query (value="UPDATE `Event` SET `id_state_person`='0' WHERE `id_person`=?1", nativeQuery=true)
+	public void delete(Integer id);
 	
 	public List<User> findAll();
 

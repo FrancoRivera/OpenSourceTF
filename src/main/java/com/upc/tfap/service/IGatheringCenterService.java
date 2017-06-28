@@ -10,4 +10,8 @@ public interface IGatheringCenterService {
 	public List<GatheringCenter> findAll();
 	
 	public List<GatheringCenter> findByEvent(int id);
+	
+	public List<GatheringCenter> findByUser(User u);
+	
+	public void save(GatheringCenter gc);
 }

@@ -43,7 +43,11 @@ public class Event {
 	@Column(name="ending_date_event")
 	private Date ending_date;
 	
-	@OneToMany
+	@ManyToOne
+	@JoinColumn(name="id_state_event", insertable=false)
+	private Status status;
+	
+	@OneToMany(mappedBy="event")
 	List<GatheringCenter> gathering_centers;
 	
 	public List<GatheringCenter> getGathering_centers() {
@@ -96,4 +100,12 @@ public class Event {
 		this.ending_date = ending_date;
 	}
 	
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 }

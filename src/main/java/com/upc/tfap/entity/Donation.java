@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.upc.tfap.entity.Status;
+
 @Entity
 public class Donation {
 	
@@ -32,6 +34,10 @@ public class Donation {
 	
 	//@ManyToOne(cascade = CascadeType.ALL)
 	
+	@ManyToOne
+	@JoinColumn(name="id_state_donation", insertable=false)
+	private Status status; 
+
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="id_person_donation")
 	private User user;
@@ -78,4 +84,13 @@ public class Donation {
 	public void setDcreation(Date dcreation) {
 		this.dcreation = dcreation;
 	}
+	
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 }

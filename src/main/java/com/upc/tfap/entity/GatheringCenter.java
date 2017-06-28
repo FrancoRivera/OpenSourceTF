@@ -24,7 +24,10 @@ public class GatheringCenter {
 	@Column(name="img_gatheringcenter")
 	private	String image;
 	
-	
+	@ManyToOne
+	@JoinColumn(name="id_state_gatheringcenter", insertable=false)
+	private Status status; 
+
 	@ManyToOne
 	@JoinColumn(name="id_event_gatheringcenter")
 	private Event event;
@@ -109,6 +112,14 @@ public class GatheringCenter {
 	}
 	public void setDonations(List<Donation> donations) {
 		this.donations = donations;
+	}
+	
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 }

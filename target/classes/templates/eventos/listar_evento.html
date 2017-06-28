@@ -37,11 +37,12 @@
                       <th>Fecha Creacion</th>
                       <th>Fecha Inicio</th>
                       <th>Fecha Fin</th>
+                      <th>Estado</th>
                     </tr>
                 </thead>
                  <tbody>
 
-                    <tr th:if="${eventos}" th:each="evento:${eventos}">
+                    <tr th:if="${eventos}" th:each="evento:${eventos}" th:classappend="${evento.status.name.contains('INA')} ? 'text-danger' : '' ">
                       <td th:text="${evento.id_event}"></td>
                       <td th:text="${evento.user.dniruc}"></td>
                       <td th:text="${evento.nombre}"></td>
@@ -49,6 +50,8 @@
                        <td th:text="${evento.creation_date}"></td>
                       <td th:text="${evento.starting_date}"></td>
                       <td th:text="${evento.ending_date}"></td>
+                      <td th:text="${evento.status.name}" >
+                      </td>
                       <td><a th:href="${'/eventos/' + evento.id_event}" class="btn btn-primary">Edit</a></td>
                      <td> <form th:action="@{/eventos/{id}/delete(id=${evento.id_event})}" method="post" >
                       <input type="hidden" name="id_event" th:value="${evento.id_event}">
