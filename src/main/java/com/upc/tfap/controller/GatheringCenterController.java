@@ -1,6 +1,8 @@
 package com.upc.tfap.controller;
 
 
+import java.io.Serializable;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,6 +39,7 @@ public class GatheringCenterController {
 		UsuarioAuth user=(UsuarioAuth) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("user", user.getUsuario());
 		model.addAttribute("lista", ig.findByUser(user.getUsuario()));
+
 		return "gcenter/listar_gcenter"; 
 		
 	}
@@ -67,7 +70,15 @@ public class GatheringCenterController {
 		model.addAttribute("user", user.getUsuario());
 		gc.setUser(user.getUsuario());
 		ig.save(gc);
-		System.out.println("Se guardó!!!");
+		return "redirect:/gc"; 
+		
+	}
+	
+	@PostMapping("/eliminar")
+	public String eliminarPost(Model model, GatheringCenter gc){
+		UsuarioAuth user=(UsuarioAuth) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("user", user.getUsuario());
+		ig.delete(gc);
 		return "redirect:/gc"; 
 		
 	}

@@ -14,4 +14,6 @@ public interface IGatheringCenterService {
 	public List<GatheringCenter> findByUser(User u);
 	
 	public void save(GatheringCenter gc);
+	
+	public void delete(GatheringCenter gc);
 }

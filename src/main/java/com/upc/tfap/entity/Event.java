@@ -4,8 +4,10 @@ import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,7 +36,7 @@ public class Event {
 	@Column(name="description_event")
 	private String description;
 	
-	@Column(name="creation_date_event")
+	@Column(name="creation_date_event",  updatable = false)
 	private Date creation_date = Date.valueOf(LocalDateTime.now().toLocalDate());
 	
 	@Column(name="starting_date_event")
@@ -43,8 +45,8 @@ public class Event {
 	@Column(name="ending_date_event")
 	private Date ending_date;
 	
-	@ManyToOne
-	@JoinColumn(name="id_state_event", insertable=false)
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL) 
+	@JoinColumn(name="id_state_event", updatable=false)
 	private Status status;
 	
 	@OneToMany(mappedBy="event")

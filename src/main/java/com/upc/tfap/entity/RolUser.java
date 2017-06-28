@@ -16,8 +16,6 @@ public class RolUser {
 	private Long id_person_role;
     
 
-
-
 	@ManyToOne
     @JoinColumn(name = "id_person", referencedColumnName = "id_person")
     private User usuario;

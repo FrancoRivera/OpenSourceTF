@@ -27,14 +27,16 @@ public class Donation {
 	@Column(name="quantity_donation")
 	private float quantity;
 	@Column(name="creation_date_donation")
+	
 	private Date dcreation;
+	
 	@ManyToOne
 	@JoinColumn(name="id_gatheringcenter_donation")
 	private GatheringCenter gatheringcenter;
 	
 	//@ManyToOne(cascade = CascadeType.ALL)
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="id_state_donation", insertable=false)
 	private Status status; 
 

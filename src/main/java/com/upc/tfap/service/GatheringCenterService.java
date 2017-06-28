@@ -25,7 +25,16 @@ public class GatheringCenterService implements IGatheringCenterService{
 	@Override
 	public List<GatheringCenter> findAll() {
 		// TODO Auto-generated method stub
-		return gcr.findAll();
+		List<GatheringCenter> aux = new ArrayList<GatheringCenter>();
+		List<GatheringCenter> lista = (List<GatheringCenter>) gcr.findAll();
+		for (int i = 0; i < lista.size(); i++){
+			if(!lista.get(i).getStatus().getName().contains("INA")){
+				aux.add(lista.get(i));
+				System.out.println(lista.get(i).getStatus().getName());
+			}
+		}
+		return aux;
+
 	}
 
 	@Override
@@ -46,6 +55,12 @@ public class GatheringCenterService implements IGatheringCenterService{
 		// TODO Auto-generated method stub
 		gcr.save(gc);
 		
+	}
+
+	@Override
+	public void delete(GatheringCenter gc) {
+		// TODO Auto-generated method stub
+		gcr.delete(gc);
 	}
 
 	

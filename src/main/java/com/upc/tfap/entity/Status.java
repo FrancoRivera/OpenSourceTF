@@ -2,6 +2,8 @@ package com.upc.tfap.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,25 +12,27 @@ import javax.persistence.Table;
 public class Status {
 	
 	@Id
-	private Integer id_state;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_state")
+	private Integer id;
 	
 	@Column(name="name_state")
 	private String name;
 	
 	public Integer getId() {
-		return id_state;
+		return id;
 	}
 
 	public void setId(Integer id) {
-		this.id_state = id;
+		this.id = id;
 	}
 	
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name_state) {
-		this.name = name_state;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 

@@ -56,14 +56,12 @@ public class EventController {
 	public String newEvent(Event e, Model model){
 		es.save(e);
 		return "redirect:/eventos";
-
 	}
 
 	@GetMapping("/{id}")
 	public String findOne(@PathVariable Integer id,Model model){
 		UsuarioAuth user=(UsuarioAuth) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		model.addAttribute("user", user.getUsuario());
-		
 		model.addAttribute("evento", es.findOne(id));
 		
 		

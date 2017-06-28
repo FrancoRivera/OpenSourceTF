@@ -36,8 +36,6 @@ public class GatheringCenter {
 	@JoinColumn(name="id_person_gatheringcenter")
 	private User user;
 	
-	@OneToMany
-	private List<Donation>donations;
 	
 	@Column(name="lattitude_gatherincenter")
 	private double lattitude;
@@ -107,13 +105,7 @@ public class GatheringCenter {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public List<Donation> getDonations() {
-		return donations;
-	}
-	public void setDonations(List<Donation> donations) {
-		this.donations = donations;
-	}
-	
+
 	public Status getStatus() {
 		return status;
 	}
