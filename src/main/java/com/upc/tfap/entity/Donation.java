@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.criteria.Fetch;
 
 import com.upc.tfap.entity.Status;
 
@@ -20,6 +22,10 @@ public class Donation {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id_donation;
+	
+	@ManyToOne(fetch=FetchType.EAGER,cascade=CascadeType.ALL)
+	@JoinColumn(name="id_donationtype_donation")
+	private DonationType dt;
 	
 
 	@Column(name="description_donation")
@@ -32,13 +38,13 @@ public class Donation {
 	@JoinColumn(name="id_gatheringcenter_donation")
 	private GatheringCenter gatheringcenter;
 	
-	//@ManyToOne(cascade = CascadeType.ALL)
 	
+	//@ManyToOne(cascade = CascadeType.ALL)
 	@ManyToOne
-	@JoinColumn(name="id_state_donation", insertable=false)
+	@JoinColumn(name="id_state_donation",updatable=false, insertable=false)
 	private Status status; 
 
-	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne/*(fetch=FetchType.EAGER, cascade=CascadeType.ALL)*/
 	@JoinColumn(name="id_person_donation")
 	private User user;
 	
@@ -92,5 +98,11 @@ public class Donation {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-
+	public DonationType getDt() {
+		return dt;
+	}
+	public void setDt(DonationType dt) {
+		this.dt = dt;
+	}
+	
 }

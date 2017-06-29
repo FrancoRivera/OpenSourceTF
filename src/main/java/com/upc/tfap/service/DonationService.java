@@ -23,7 +23,7 @@ public class DonationService implements IDonationService {
 	@Override
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
-		dr.delete(id);
+		dr.deletes(id);
 		
 	}
 
@@ -34,13 +34,13 @@ public class DonationService implements IDonationService {
 	}
 
 	@Override
-	public <S extends Donation> S save(Donation d) {
+	public void save(Donation d) {
 		// TODO Auto-generated method stub
-		return dr.save(d);
+		dr.save(d);
 	}
 	
 	@Override
-	public List<Donation>listarReal(Object u){
-		return dr.findByUser((User)u);
+	public List<Donation>listarReal(User u){
+		return dr.findByUser(u);
 	}
 }

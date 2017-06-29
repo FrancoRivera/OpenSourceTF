@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Ingresar Centro de Acopio</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+</head>
+<body>
+
+
+
+<div th:replace="fragmentos/header::header"></div>
+
+<div class="margin_30"></div>
+<div class="margin_30"></div>
+<div class="margin_30"></div>
+<div class="margin_30"></div>
+<div class="container">
+
+<!-- START OF TEMPLATE -->
+
+ <div class="row">
+     <div class="col-md-12">
+     	<div class="row">
+     	<div class="col-md-12">
+         <h1 class="text-center">Ingresa una nuevo centro de Acopio </h1>
+         </div>
+         </div>
+   
+     </div>
+ </div>
+ <div class="margin_30"></div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <form th:action="@{/gc/agregar}" method="POST" th:object="${gcenter}" >
+
+      <input type="hidden" name="action" value="add">
+       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+
+       <div class="row">
+           <div class="col-md-12">  <input class="form-control" type="text" name="Nombre" placeholder="Nombre" th:field="${gcenter.nombre}"> 
+        
+           <input class="form-control" id="geo_lat" type="hidden" value="0" name="lattitude" th:field="${gcenter.lattitude}" placeholder="latitud">
+           <input id="geo_long" class="form-control" type="hidden" value="0" name="longitude" th:field="${gcenter.longitude}" placeholder="longitud"></div>
+       </div>
+       <div class="margin_10"></div>
+      <div class="row">
+           <div class="col-md-12">
+           <select name="evento" class="form-control" th:field="${gcenter.event}">
+             			<option th:each="e:${lista}" th:value="${e.id_event}" th:text="${e.nombre} + ' - ' + ${e.starting_date}"> </option>
+					</c:forEach>	
+           </select>
+           </div>
+       </div>
+       <div class="margin_10"></div>
+          <div class="row">
+              <div class="col-md-12">  <textarea type="text" name="descrip" rows="5"class="form-control" th:field="${gcenter.description}" placeholder="Describe el Centro de Donacion, direccion etc"></textarea></div>
+       </div>
+    	
+    	    	 <div class="margin_30"></div>
+       
+           <div class="row">
+        <div class="col-md-12">Selecciona en el mapa el lugar de tu centro de acopio</div>
+    </div>
+    
+    	 <div class="margin_30"></div>
+       
+           <div class="row">
+        <div class="col-md-12"><div id="map"></div></div>
+    </div>
+
+       <div class="margin_30"></div>
+       <div class="row">
+       <div class="col-md-2"></div>
+       <div class="col-md-8"> <button id="id_save" disabled="disabled" class="btn btn-primary" style="width:100%">Ingresar Centro de Acopio!</button></div>
+ 
+       </div>
+       </form>
+    </div>
+   </div>
+
+  <!-- END OF TEMPLATE -->
+  
+  
+   </div>
+    
+  <div class="margin_100"></div>
+  
+
+<jsp:include page="footer.jsp" /> 
+
+ <script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="   crossorigin="anonymous"></script>
+<script   src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"   integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="   crossorigin="anonymous"></script>
+<script src="../js/holder.min.js"></script>
+<script src="../js/bootstrap-datepicker.min.js"></script>
+      <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUrwGV5uTEmjYr49cM6UQ86ErpJn8Iaxo&callback=initMap">
+    </script>
+     <script>
+    var map;
+    var pos_actual;
+      function initMap() {
+        var uluru = {lat: -12.07, lng: -77.044};
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 13,
+          center: uluru
+        });
+  
+      google.maps.event.addListener(map, "click", function(event) {
+    	    var lat = event.latLng.lat();
+    	    var lng = event.latLng.lng();
+    	    // populate yor box/field with lat, lng
+    	    //lat = parseFloat(Math.round(lat * 1000000) / 1000000).toFixed(6);
+    	    //lng = parseFloat(Math.round(lng * 1000000) / 1000000).toFixed(6);
+    	    $("#geo_lat").val(lat);
+    	    $("#geo_long").val(lng);
+
+    	    ponerMarcador(lat, lng);
+    	});
+      }
+      function ponerMarcador(lati, longi){
+         if (pos_actual == null){
+           
+    	  pos_actual = new google.maps.Marker({
+	          position: {lat: parseFloat(lati), lng: parseFloat(longi)},
+	          map: map,
+	          animation: google.maps.Animation.DROP,
+	        });
+            $("#id_save").prop("disabled", false);
+            console.log("yolo")
+            
+	        }
+         else{
+             changeMarkerPosition(pos_actual)}
+      }
+      function changeMarkerPosition(marker) {
+    	    var latlng = new google.maps.LatLng( $("#geo_lat").val(),  $("#geo_long").val());
+    	    marker.setPosition(latlng);
+    	}
+    </script>
+<script>
+$('.input-daterange input').each(function() {
+    $(this).datepicker({
+    format:"yyyy-mm-dd"
+    })
+});
+
+$("#select_tipo").on("change", function(){
+	if ($(this).val()=="Dinero"){
+		$("#input_qty").slideDown();
+	}
+	else{
+		$("#input_qty").slideUp();
+	}
+});
+
+</script>
+
+
+  </body>
+</html>
+
+
+
+
+
+

@@ -64,8 +64,8 @@ public class User{
 		@OneToMany
 		private List<GatheringCenter> gathering_centers;
 		
-		@OneToMany(cascade = CascadeType.ALL)
-		//@OneToMany
+		//@OneToMany(cascade = CascadeType.ALL)
+		@OneToMany
 		private List<Donation> donations;
 		
 		public List<Event> getEvents() {
