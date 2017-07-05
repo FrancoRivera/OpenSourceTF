@@ -7,6 +7,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "personrole")
 public class RolUser {
@@ -15,12 +17,12 @@ public class RolUser {
 	@GeneratedValue
 	private Long id_person_role;
     
-
+	@JsonIgnore
 	@ManyToOne
     @JoinColumn(name = "id_person", referencedColumnName = "id_person")
     private User usuario;
 
- 
+	@JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_role", referencedColumnName = "id_role")
     private Rol role;

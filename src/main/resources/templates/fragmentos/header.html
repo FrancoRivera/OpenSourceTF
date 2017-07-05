@@ -1,61 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-   <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="/favicon.ico">
 
-    <title>Inicio | Ayudando Peru </title>
-
-       <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <link rel="stylesheet" href="/css/style.css">
-    <style>
-        .header{
-    width: 100%; padding: 90px 10px 10px;
-        color: white; font-size: 50px;
-        background-color: #20B2AA; 
-            font-weight:500
-             }
-             nav{
-                 position: absolute;
-                 right: 50px;
-                 top: 20px;
-                width:700px;
-             }
-             nav ul {
-                 list-style-type:  none;
-             }
-             nav ul li{
-                     display: inline-block;
-                padding: 16px;
-                font-size: 20px;
-                font-weight: 200;
-             }
-             nav ul li a{
-                  color: white;
-             }
-             nav ul li a:hover{
-                 border-bottom: 1px solid white;
-                 color:white;
-                 text-decoration: none;
-             }  
-    </style>   
-    
-    </head>
-  <body>
  <div th:fragment="header">
 
  <div th:switch="${user}"> 
@@ -89,7 +32,7 @@
                   <li ><a href="/usuario/lista">Mis usuarios</a></li>
               </ul>
           </nav>
-          <div class="titulo"><img id="logo" src="/imgs/logo.png" style="width:80px;margin: 20px;"/><div id="titulo_website"style="font-family:Arial Rounded MT;">Ayudando PERU</div></div>
+          <div class="titulo"><img id="logo" src="/imgs/logo.png" style="width:80px;margin: 20px;"/><div id="titulo_website">Ayudando PERU</div></div>
 
    </div>
 </div>

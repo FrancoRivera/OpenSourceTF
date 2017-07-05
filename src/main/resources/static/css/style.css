@@ -28,12 +28,16 @@
         width: 100%; padding: 90px 10px 10px;
         color: white; font-size: 50px;
         border-bottom: 7px solid;
-        background-color: #449a5a; 
+        background-color: #20B2AA; 
             font-weight:500
              }
 
+@font-face {
+    font-family: ArialRounded;
+    src: url("../fonts/Arial_Rounded_MT.ttf");
+}
 
-        #titulo_website{display: inline-block;}
+        #titulo_website{display: inline-block; font-family: ArialRounded;}
 
          #titulo_mapa{
         text-align: center;
