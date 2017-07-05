@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Lista de Donaciones</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+
+</head>
+<body>
+
+
+    <div th:replace="fragmentos/header::header"></div>
+
+<div class="container-fluid">
+  
+  <div class="margin_30"></div>
+  
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+       <div class="panel panel-default" style="margin:10px">
+     
+          <div class="panel-heading">
+           
+				<h1 class="text-center panel-title">Tu lista de Donaciones</h1>
+				</div>
+				<h1 th:text="${message}"></h1>
+				<table class="table">
+				<thead>
+				<tr>
+				<th> ID </th> <th> Centro de Acopio </th> <th> Nombre Usuario </th> <th> Descripcion </th> <th> Cantidad </th>
+				</tr>
+
+					<tr th:each="p:${lista}">
+					<td th:text="${p.id_donation}" th:value="${p.id_donation}" > </td>
+					<td th:text="${p.getGatheringcenter().getNombre()}"> </td>
+					<td th:text="${p.getUser().getNombre()}"> </td>
+					<td th:text="${p.description}"> </td>
+					<td th:text="${p.quantity}"> </td>
+					<td> <form th:action="@{/donations/delete}" method="post" >
+						<input type="hidden" name="donation_id" th:value="${p.id_donation}">
+						<button class="btn btn-danger">Borrar</button></form></td>
+					
+					<td>
+						<form th:action="@{/donations/edit/}+${p.id_donation}">
+						<button class="btn btn-primary" type="submit">Editar</button>
+						</form>
+					</td>
+					</tr>
+							
+									
+
+				</thead>
+				</table>
+				   </div>
+				  
+  
+          </div>
+     </div>
+
+     	     <div class="margin_30"></div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+             <a href="/donations/edit/0" ><button type="button" class="btn btn-primary form-control"> Agregar nueva donacion </button></a>
+		
+        </div>
+
+    </div>
+         <div class="margin_100"></div>
+     </div>
+</body>
+</html>

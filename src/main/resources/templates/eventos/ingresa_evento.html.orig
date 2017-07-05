@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Nuevo Evento! </title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    
+    </head>
+  <body>
+
+
+    <div th:replace="fragmentos/header::header"></div>
+
+<div class="margin_100"></div>
+
+
+
+ <div class="row">
+     <div class="col-md-12">
+         <h1 class="text-center">Ingresa un nuevo evento </h1>
+     </div>
+ </div>
+ <div class="margin_30"></div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <div class="row">
+      <form th:action="@{/eventos/agregar}" method="POST" th:object="${evento}">
+       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+      <input type="hidden" name="user" id="id_user" th:value="${user.id}">
+       <input type="hidden" name="id_event" id="id_event" th:value="${evento.id_event}">
+       <div class="row">
+       
+
+           <div class="col-md-12">  <input type="text" class="form-control" name="nombre" th:field="*{nombre}"  th:value="${evento.nombre}" placeholder="Nombre del evento"></div>
+       </div>
+       <div class="margin_10"></div>
+      <div class="row">
+           <div class="col-md-12"> <div class="input-group input-daterange">
+		    <input type="text" class="form-control" name="starting_date"  value="2017-03-01" th:value="${evento.starting_date}" >
+		    <div class="input-group-addon">A</div>
+		    <input type="text" class="form-control" name="ending_date"  value="2017-04-01" th:value="${evento.ending_date}" >
+		</div>
+		</div>
+       </div><div class="margin_10"></div>
+          <div class="row">
+              <div class="col-md-12">  <textarea name="descrip" rows="5"class="form-control"  th:field="*{description}" placeholder="Descripcion del evento" th:value="${evento.description}"></textarea></div>
+       </div>
+       <div class="margin_30"></div>
+       <div class="row">
+       <div class="col-md-2"></div>
+       <div class="col-md-8"> <button class="btn btn-primary" style="width:100%">Ingresar el nuevo evento</button></div>
+ 
+       </div>
+       </form>
+       </div> <!-- end of row -->
+    </div> <!-- end of col-md-10 -->
+   </div>
+
+  
+  <!-- END OF TEMPLATE -->
+  
+  
+   </div>
+    
+  <div th:replace="fragmentos/footer::footer"></div>
+
+
+ <script   src="https://code.jquery.com/jquery-3.2.1.slim.min.js"   integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="   crossorigin="anonymous"></script>
+<script src="../js/holder.min.js"></script>
+<script src="../js/bootstrap-datepicker.min.js"></script>
+      
+<script>
+$('.input-daterange input').each(function() {
+    $(this).datepicker({
+    format:"yyyy-mm-dd"
+    })
+});</script>
+
+  </body>
+</html>
+
+
