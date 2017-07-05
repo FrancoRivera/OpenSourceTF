@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/style.css">
 
+<<<<<<< HEAD
 
-
-
+=======
 <style>
 
 </style>
-
+>>>>>>> 74104460c42722cb673c882034881b3dd8fce22d
 </head>
 <body>
 
@@ -31,11 +31,11 @@
         <div class="col-md-10"><div id="map"></div></div>
          <div class="col-md-1"></div>
     </div>
+<<<<<<< HEAD
 
-
-
+=======
 <div class="margin_100"></div>
-
+>>>>>>> 74104460c42722cb673c882034881b3dd8fce22d
 <div class="panel panel-default" style="margin:10px">
           <div class="panel-heading">
 				<h1 class="text-center panel-title">Tu lista de Centros de Acopio</h1>
@@ -56,9 +56,9 @@
 			<td th:text="${p.lattitude}"></td>
 			<td th:text="${p.longitude}"></td>
 			<td th:text="${p.status.name}"></td>
-
-
-
+<<<<<<< HEAD
+			<td> <form action="gcenter" method="post"><input type="hidden" name="action" value="delete"><input type="hidden" name="gc_id" value="${p.id_gatheringcenter}"><button class="btn btn-danger">Borrar</button></form></td>
+=======
 			<td> <form th:action="@{/gc/eliminar}" method="POST" ><input type="hidden" name="action" value="delete">
 
 			<input type="hidden" name="gc_id" value="${p.id_gatheringcenter}">
@@ -66,7 +66,7 @@
 			<button class="btn btn-danger">Borrar</button>
 			  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			  </form></td>
-
+>>>>>>> 74104460c42722cb673c882034881b3dd8fce22d
 			</tr>
 
 	</thead>
@@ -85,6 +85,12 @@
 
     </div>
     	     <div class="margin_100"></div>
+
+<<<<<<< HEAD
+	
+
+=======
+>>>>>>> 74104460c42722cb673c882034881b3dd8fce22d
 		</div>
     
 <jsp:include page="footer.jsp" /> 
@@ -127,12 +133,20 @@
 
             var posiciones = [];
 
+<<<<<<< HEAD
   	        for (var i = 0; i < 10; i++) {
               var marker = new google.maps.Marker({
                 position: {
                   lat: -12.072+Math.random()/10, 
                   lng: -77.10+Math.random()/10},
+=======
 
+		  
+          var marker = new google.maps.Marker({
+                position: {
+                  lat: 10,
+                  lng:  10},
+>>>>>>> 74104460c42722cb673c882034881b3dd8fce22d
                 map: map,
                 animation: google.maps.Animation.DROP,
                 contentString:contentString
@@ -145,7 +159,13 @@
                  infowindow.open(map, this);
                 map.setCenter(this.getPosition());
              });
+<<<<<<< HEAD
+          
   	      };
+=======
+
+		       
+>>>>>>> 74104460c42722cb673c882034881b3dd8fce22d
           };
   	 /*]]>*/
     </script>

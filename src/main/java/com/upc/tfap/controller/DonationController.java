@@ -23,9 +23,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.upc.tfap.entity.Donation;
+import com.upc.tfap.entity.DonationType;
 import com.upc.tfap.entity.GatheringCenter;
 import com.upc.tfap.entity.User;
 import com.upc.tfap.entity.UsuarioAuth;
+import com.upc.tfap.repository.DonationTypeRepository;
 import com.upc.tfap.service.IDonationService;
 import com.upc.tfap.service.IGatheringCenterService;
 import com.upc.tfap.service.IUserService;
@@ -41,7 +43,8 @@ public class DonationController {
 	IDonationService ids;
 	@Autowired
 	IGatheringCenterService igcs;
-
+	@Autowired
+	DonationTypeRepository dtrp; 
 	
 	@GetMapping(path={"/", ""})
 	public String listDonation(Model model, HttpServletRequest request){
@@ -59,27 +62,29 @@ public class DonationController {
 	//manejar si es nuevo ingreso o un editar, nose si este controlador funcione
 	@GetMapping("/edit/{id}" )
 	public String editDonacion(@PathVariable Long id,Model model){
-		List<GatheringCenter> ls=new ArrayList<GatheringCenter>();
-		ls.add(new GatheringCenter(1,"gc1"));
-		ls.add(new GatheringCenter(9,"gc2"));
 		if(id!=0){
 			model.addAttribute("donation",ids.findOne(id));
 		}else{
-			Donation d=new Donation();
 			model.addAttribute("donation",new Donation());
 		}
+		UsuarioAuth user=(UsuarioAuth) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("user", user.getUsuario());
 		model.addAttribute("lista",igcs.findAll());
+		model.addAttribute("lstTipo",dtrp.findAll());
 		return "donaciones/ingresa_donacion";
 	}
 	
 	@PostMapping("/save")
 	public String save(@Valid Donation donation,BindingResult result){
 		if(result.hasErrors()){
-			
-			return "redirect:/donations/edit0";
+			System.out.println(result);
+			return "redirect:/donations/edit/0";
 		}
 		
 		donation.setDcreation(Date.valueOf(LocalDateTime.now().toLocalDate()));
+		/*DonationType dt=dtrp.findOne(donation.getDt().getId_donationtype());
+		donation.setDt(dt);*/
+		System.out.println(donation.getId_donation());
 		ids.save(donation);
 		return "redirect:/donations";
 	}

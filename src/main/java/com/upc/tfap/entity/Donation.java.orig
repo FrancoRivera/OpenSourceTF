@@ -41,14 +41,14 @@ public class Donation {
 	private GatheringCenter gatheringcenter;
 	
 	
-
-
-
-
+<<<<<<< HEAD
+	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn(name="id_state_donation", insertable=false)
+=======
 	//@ManyToOne(cascade = CascadeType.ALL)
 	@ManyToOne
 	@JoinColumn(name="id_state_donation",updatable=false, insertable=false)
-
+>>>>>>> donaciones
 	private Status status; 
 
 	@ManyToOne/*(fetch=FetchType.EAGER, cascade=CascadeType.ALL)*/
