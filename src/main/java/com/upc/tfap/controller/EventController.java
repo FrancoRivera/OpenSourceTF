@@ -33,7 +33,9 @@ public class EventController {
 	@GetMapping(path={"/", ""})
 	public String findAll(Model model, HttpServletRequest request){
 		UsuarioAuth user=(UsuarioAuth) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
 		model.addAttribute("user", user.getUsuario());
+		System.out.println(user.getUsuario());
 		model.addAttribute("eventos", es.findAll(user.getUsuario())); 
 
 		
@@ -44,6 +46,7 @@ public class EventController {
 	@GetMapping("/agregar")
 	public String newEvent(Model model, HttpServletRequest request){
 		UsuarioAuth user=(UsuarioAuth) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
 		model.addAttribute("user", user.getUsuario());
 		
 		model.addAttribute("evento",new Event());

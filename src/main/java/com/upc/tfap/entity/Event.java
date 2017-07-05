@@ -46,7 +46,7 @@ public class Event {
 	private Date ending_date;
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL) 
-	@JoinColumn(name="id_state_event", updatable=false)
+	@JoinColumn(name="id_state_event", insertable=false)
 	private Status status;
 	
 	@OneToMany(mappedBy="event")
