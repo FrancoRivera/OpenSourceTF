@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>Lista de Centros de Acopio</title>
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+<style>
+
+</style>
+</head>
+<body>
+
+
+
+<div th:replace="fragmentos/header::header"></div>
+
+
+<div class="margin_30"></div>
+<div class="margin_30"></div>
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-1"></div>
+        <div class="col-md-10"><div id="map"></div></div>
+         <div class="col-md-1"></div>
+    </div>
+<div class="margin_100"></div>
+<div class="panel panel-default" style="margin:10px">
+          <div class="panel-heading">
+				<h1 class="text-center panel-title">Tu lista de Centros de Acopio</h1>
+			</div>
+
+
+	<table class="table">
+	<thead>
+	<tr>
+	<th> ID </th> <th> Nombre </th> <th> Descripcion </th> <th>Evento </th><th> Coordenada 1 </th> <th> Coordenada 2 </th><th>Estado</th> <th> Borrar </th>
+	</tr>
+
+			<tr th:each="p:${lista}" th:classappend="${p.status.name.contains('INA')} ? 'text-danger' : '' ">
+			<td th:text="${p.id_gatherincenter}"> </td>
+			<td th:text="${p.nombre}"> </td>
+			<td th:text="${p.description}"> </td>
+			<td th:text="${p.event.nombre}"> </td>
+			<td th:text="${p.lattitude}"></td>
+			<td th:text="${p.longitude}"></td>
+			<td th:text="${p.status.name}"></td>
+			<td> <form th:action="@{/gc/eliminar}" method="POST" ><input type="hidden" name="action" value="delete">
+
+			<input type="hidden" name="gc_id" value="${p.id_gatheringcenter}">
+
+			<button class="btn btn-danger">Borrar</button>
+			  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			  </form></td>
+			</tr>
+
+	</thead>
+	</table>
+	<p th:if="${lista==null}">No hay eventos</p>
+					
+</div>
+	
+	     <div class="margin_30"></div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <a href="gc/agregar"><button type="button" class="btn btn-primary form-control"> Agregar nuevo Centro de Acopio </button></a>
+		
+        </div>
+
+    </div>
+    	     <div class="margin_100"></div>
+
+		</div>
+    
+<jsp:include page="footer.jsp" /> 
+ <script   src="https://code.jquery.com/jquery-3.2.1.slim.min.js"   integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="   crossorigin="anonymous"></script>
+<script src="js/holder.min.js"></script>
+<script th:src="@{https://maps.googleapis.com/maps/api/js?key=AIzaSyBUrwGV5uTEmjYr49cM6UQ86ErpJn8Iaxo}"></script>
+      
+    <script type="text/javascript" th:inline="javascript">
+      /*<![CDATA[*/
+  	    var map;
+
+        var contentString = '<div id="content">'+
+              '<div id="siteNotice">'+
+              '</div>'+
+              '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+              '<div id="bodyContent">'+
+              '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+              'sandstone rock formation in the southern part of the '+
+              'Northern Territory,' +
+              'Heritage Site.</p>'+
+              '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+              'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+              '(last visited June 22, 2009).</p>'+
+              '</div>'+
+              '</div>';
+
+          var infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+
+        $(document).ready(function(){initMap()});
+
+
+  	      function initMap() {
+  	        var uluru = {lat: -12.07, lng: -77.044};
+  	        map = new google.maps.Map(document.getElementById('map'), {
+  	          zoom: 11,
+  	          center: uluru
+  	        });
+
+            var posiciones = [];
+
+
+		  
+          var marker = new google.maps.Marker({
+                position: {
+                  lat: 10,
+                  lng:  10},
+                map: map,
+                animation: google.maps.Animation.DROP,
+                contentString:contentString
+
+               })
+               var infowindow = new google.maps.InfoWindow({});
+              posiciones.push(marker);
+               marker.addListener('click', function() {
+                  infowindow.setContent(this.contentString);
+                 infowindow.open(map, this);
+                map.setCenter(this.getPosition());
+             });
+
+		       
+          };
+  	 /*]]>*/
+    </script>
+      
+  </body>
+</html>
+

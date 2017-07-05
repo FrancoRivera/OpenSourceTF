@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<div class="margin_30"></div>
+<div class="margin_30"></div>
+<div class="container">
+
+<!-- START OF TEMPLATE -->
+
+ <div class="row">
+     <div class="col-md-12">
+      <div class="row">
+      <div class="col-md-12">
+         <h1 class="text-center">Ingresa una nueva donacion </h1>
+         </div>
+         </div>
+ 
+     </div>
+ </div>
+ <div class="margin_30"></div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-10">
+      <form th:action="@{/donations/save}" method="post" th:object="${donation}" >
+      <input name="id" type="hidden" th:field="*{id_donation}">
+      <input type="hidden" name="action" value="add">
+
+
+      <input type="hidden" th:if="*{user.id}!=0" id="id_user" name="user.id" th:field="*{user.id}" />
+      <!-- el uno luego reemplazarlo por el usuario en sesión-->
+      <input type="hidden" th:unless="*{user.id}!=0"} id="id_user" name="user.id" value="1" />
+
+      
+       <div class="row">
+           <div class="col-md-8"> <select id="select_tipo" name="type" ><option  value="Ropa" th:selected="*{type}==Ropa">Ropa</option><option value="Juguetes" th:selected="*{type}==Juguetes">Juguetes</option><option value="Dinero" th:selected="*{type}==Dinero">Dinero</option></select></div>
+       </div>
+       <div class="margin_10"></div>
+      <div class="row">
+           <div class="col-md-8">
+           <select id="id_gatheringc" name="gatheringcenter.id_gatheringcenter" class="form-control">
+           <option th:each="p:${lista}" th:value="${p.id_gatheringcenter}" th:text="${p.nombre}" th:selected="${p.id_gatheringcenter}==*{gatheringcenter.id_gatheringcenter}"></option>
+           </select>
+           </div>
+       </div>
+       <div class="margin_10"></div>
+          <div class="row">
+              <div class="col-md-8">  <textarea type="text" name="description" rows="5"class="form-control" placeholder="Descripcion de la donacion" th:text="*{description}"></textarea></div>
+       </div>
+         <div class="margin_10"></div>
+          <div id="input_qty" class="row" style="display:none;">
+              <!-- falta cambiar value de a cantidad -->
+              <div class="col-md-8">  <input  type="number" name="quantity" th:field="*{quantity}" rows="5"class="form-control" placeholder="Cantidad en Soles"></div>
+       </div>
+       
+       <div class="margin_30"></div>
+       <div class="row">
+       <div class="col-md-1"></div>
+       <div class="col-md-6"> <button id="" class="btn btn-primary" style="width:100%">Ingresar la donacion!</button></div>
+ 
+       </div>
+       </form>
+    </div>
+   </div>
+
+  <!-- END OF TEMPLATE -->
+  
+  
+   </div>
+  <!--  jsp:include page="footer.jsp" /--> 
+ <!--  script   src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="   crossorigin="anonymous"--><!-- /script-->
+<!-- script   src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"   integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="   crossorigin="anonymous"--><!-- /script-->
+<script src="js/holder.min.js"></script>
+<script src="js/bootstrap-datepicker.min.js"></script>
+      
+<script>
+$('.input-daterange input').each(function() {
+    $(this).datepicker({
+    format:"yyyy-mm-dd"
+    })
+});
+
+$("#select_tipo").on("change", function(){
+  if ($(this).val()=="Dinero"){
+    $("#input_qty").slideDown();
+  }
+  else{
+    $("#input_qty").slideUp();
+  }
+});
+
+</script>
+</body>
+
+
+
