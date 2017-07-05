@@ -9,9 +9,10 @@ public interface IDonationService {
 	public List<Donation> listar();
 	public void delete(Long id);
 	public Donation findOne(Long id);
-	public <S extends Donation> S save(Donation d);
+	public void save(Donation d);
 	
-	public List<Donation>listarReal(Object u);
+	public List<Donation>listarReal(User u);
+
 	
 
 }
