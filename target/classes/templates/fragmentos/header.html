@@ -1,0 +1,38 @@
+
+ <div th:fragment="header">
+
+ <div th:switch="${user}"> 
+  <div th:case="${null}" class="login">
+     <span class="login_options"><a href="/usuario"><span id="login_button" class="login_option"><span class="glyphicon glyphicon-user"></span> Ingresa </span></a><a href="/usuario/registro"><span class="login_option"><span class="glyphicon glyphicon-edit"></span> <u>Registrate </u></span></a></span>
+
+  </div>
+    <div class="login" th:case="*">
+         <span class="login_options">
+            <a href="#">
+                <span id="login_button" class="login_option">
+                    <span class="glyphicon glyphicon-user"></span> <span th:text="${user.dniruc} "></span>
+                </span>
+            </a>
+            <a href="usuario/logout">
+                <span class="login_option">
+                    <span class="glyphicon glyphicon-edit"></span> <u>Logout</u>
+                </span>
+            </a>
+         </span>
+    </div>
+</div>
+
+   <div class="header">
+          <nav>
+            <ul>
+                  <li ><a href="/">Inicio</a></li>
+                  <li><a href="/donations">Mis donaciones</a></li>
+                  <li><a href="/eventos">Mis eventos</a></li>
+                  <li ><a href="/gc">Mis centros de acopio</a></li>
+                  <li ><a href="/usuario/lista">Mis usuarios</a></li>
+              </ul>
+          </nav>
+          <div class="titulo"><img id="logo" src="/imgs/logo.png" style="width:80px;margin: 20px;"/><div id="titulo_website">Ayudando PERU</div></div>
+
+   </div>
+</div>

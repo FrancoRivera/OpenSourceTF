@@ -39,7 +39,8 @@
 					<td th:text="${p.id_donation}" th:value="${p.id_donation}" > </td>
 					<td th:text="${p.getGatheringcenter().getNombre()}"> </td>
 					<td th:text="${p.getUser().getNombre()}"> </td>
-					<td th:text="${p.description}"> </td>
+					<td th:if="${p.description != ''}"> <span th:text="${p.description}"></span></td>
+					<td th:if="${p.description == ''}"><span>No hay descrip</span></td>
 					<td th:text="${p.quantity}"> </td>
 					<td> <form th:action="@{/donations/delete}" method="post" >
 						<input type="hidden" name="donation_id" th:value="${p.id_donation}">

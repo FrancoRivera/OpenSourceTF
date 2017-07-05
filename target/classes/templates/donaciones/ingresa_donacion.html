@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+<meta charset="UTF-8"/>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<div th:replace="fragmentos/header::header"></div>
 <div class="margin_30"></div>
 <div class="margin_30"></div>
 <div class="container">
@@ -38,7 +43,7 @@
        <div class="row">
            <div class="col-md-8"> 
 
-           <select id="id_donationtype_donation" name="dt" th:field="*{dt}"><option th:each="tp:${lstTipo}" th:value="${tp.id_donationtype}" th:text="${tp.name_donationType}"></option>
+           <select id="id_donationtype_donation" name="dt" th:field="*{dt}" class="form-control"><option th:each="tp:${lstTipo}" th:value="${tp.id_donationtype}" th:text="${tp.name_donationType}"></option>
            </select>
            </div>
        </div>
@@ -97,6 +102,7 @@ $("#select_tipo").on("change", function(){
 });
 
 </script>
+ <div class="margin_100"></div>
 </body>
 
 
