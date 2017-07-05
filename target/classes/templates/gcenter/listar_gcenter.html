@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="/css/style.css">
 
 
+
+
+<style>
+
+</style>
+
 </head>
 <body>
 
@@ -25,6 +31,10 @@
         <div class="col-md-10"><div id="map"></div></div>
          <div class="col-md-1"></div>
     </div>
+
+
+
+<div class="margin_100"></div>
 
 <div class="panel panel-default" style="margin:10px">
           <div class="panel-heading">
@@ -46,7 +56,17 @@
 			<td th:text="${p.lattitude}"></td>
 			<td th:text="${p.longitude}"></td>
 			<td th:text="${p.status.name}"></td>
-			<td> <form action="gcenter" method="post"><input type="hidden" name="action" value="delete"><input type="hidden" name="gc_id" value="${p.id_gatheringcenter}"><button class="btn btn-danger">Borrar</button></form></td>
+
+
+
+			<td> <form th:action="@{/gc/eliminar}" method="POST" ><input type="hidden" name="action" value="delete">
+
+			<input type="hidden" name="gc_id" value="${p.id_gatheringcenter}">
+
+			<button class="btn btn-danger">Borrar</button>
+			  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			  </form></td>
+
 			</tr>
 
 	</thead>
@@ -65,9 +85,6 @@
 
     </div>
     	     <div class="margin_100"></div>
-
-	
-
 		</div>
     
 <jsp:include page="footer.jsp" /> 
@@ -115,6 +132,7 @@
                 position: {
                   lat: -12.072+Math.random()/10, 
                   lng: -77.10+Math.random()/10},
+
                 map: map,
                 animation: google.maps.Animation.DROP,
                 contentString:contentString
@@ -127,7 +145,6 @@
                  infowindow.open(map, this);
                 map.setCenter(this.getPosition());
              });
-          
   	      };
           };
   	 /*]]>*/
