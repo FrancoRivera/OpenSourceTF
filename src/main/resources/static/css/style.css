@@ -2,8 +2,10 @@
 /*                 Body                    */
 /* ========================================*/
      body{
-        background-image: url("../imgs/dark-denim-3.png");
+       /* background-image: url("../imgs/dark-denim-3.png");*/
         background-size: 340px;
+        font-family:ArialRounded;
+        background-color: antiquewhite;
              }
 
 
