@@ -52,6 +52,7 @@
 			<td th:text="${p.nombre}">  </td>
 			<td th:text="${p.dniruc}"> </td>
 			<td> <span th:each="rol:${p.getRol()}"><span th:text="${rol.name_role}"></span></span> </td>
+			<td><a th:href="${'/usuario/profile/' + p.id}" class="btn btn-primary">Ver Profile</a></td>
 			<td><a th:href="${'/usuario/update/' + p.id}" class="btn btn-primary">Edit</a></td>
 			<td><a th:href="${'/usuario/delete/' + p.id}" class="btn btn-danger">Delete</a></td>
 			</tr>
