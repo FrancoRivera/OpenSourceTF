@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 import com.upc.tfap.util.Session;
 import com.upc.tfap.entity.User;
 import com.upc.tfap.entity.UsuarioAuth;
+import com.upc.tfap.service.IDonationService;
 import com.upc.tfap.service.IUserService;
 
 @Controller
@@ -25,7 +26,8 @@ public class UserController {
 	
 	@Autowired
 	private IUserService iu; 
-	
+	@Autowired
+	private IDonationService idon; 
 	@GetMapping(path={"/",""})
 	public String index(Model model){
 		model.addAttribute("mensaje", "");
@@ -75,7 +77,31 @@ public class UserController {
 		model.addAttribute("lista", iu.listar());
 		return "usuario/listar_usuarios";  
 	}
-	
+
+	@GetMapping("/profile/{id}")
+	public String showUser(Model model,
+			@RequestParam(name="id", required=false) String id){
+		
+		UsuarioAuth user=(UsuarioAuth) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		model.addAttribute("user", user.getUsuario());
+		model.addAttribute("donaciones", idon.listarReal(user.getUsuario()));
+		if (idon.listarReal(user.getUsuario()).size() == 0){
+		 model.addAttribute("nivel", "Donador de nivel 0");
+		}else if (idon.listarReal(user.getUsuario()).size() < 5){
+			 model.addAttribute("nivel", "Donador de nivel 1");
+		}else if (idon.listarReal(user.getUsuario()).size() < 10){
+			 model.addAttribute("nivel", "Donador de nivel 2");
+		}else if (idon.listarReal(user.getUsuario()).size() < 15){
+			model.addAttribute("nivel", "Donador de nivel 3");
+		}else if (idon.listarReal(user.getUsuario()).size() < 20){
+				model.addAttribute("nivel", "Donador de nivel 4");
+		}else{
+				 model.addAttribute("nivel", "Donador de nivel 5");
+			}
+		model.addAttribute("mensaje", "");
+		model.addAttribute("mensaje", "");
+		return "usuario/profile";
+	}
 	@PostMapping(path={"/", ""})
 	public String login(Model m, User u, HttpServletRequest request){
 		if(iu.login(u) == null){

@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+   <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/favicon.ico">
+
+    <title>Registrarme | Ayudando Peru </title>
+
+       <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="/css/style.css"> 
+
+    </head>
+  <body>
+
+<div class="container ">
+
+  <div class="row">
+    <div class="col-md-8"></div>
+    <div class="col-md-8">
+      <div class="login_container">
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-10 center"><h1 th:text="${user.nombre}+ ' ' + ${user.apellido}"></h1></div>
+           <div class="full-width col-md-10 center"><h5 th:text="${nivel}"></h5></div>
+        </div>
+      <table class="table">
+				<thead>
+					<tr>
+					<th> ID </th> <th> DNI RUC </th><th> Email </th> <th> Roles </th> <th> Donaciones </th>
+					</tr>
+				</thead>
+				<tbody>	
+				
+			<tr >
+			<td th:text="${user.id}"> </td>
+			<td th:text="${user.dniruc}"> </td>
+			<td th:text="${user.email}"> </td>
+			<td> <span th:each="rol:${user.getRol()}"><span th:text="${rol.name_role}"></span></span> </td>
+			<td th:text="${donaciones.size()}"> </td>
+			</tr>
+
+
+			</tbody>	
+			<a th:href="${'/usuario/lista'}" class="btn btn-primary right">Volver</a>	
+			</table>
+        <div class="margin_30"></div>
+          
+            </div>
+                  <div class="login_container">
+      <table class="table">
+				<thead>
+					<tr>
+					<th> ID </th> <th>Descripcion </th> <th> Cantidad </th> <th> Fecha donacion </th>
+					</tr>
+				</thead>
+				<tbody>		
+		
+			<tr th:each="d:${donaciones}">
+			<td th:text="${d.id_donation}"> </td>
+			<td th:text="${d.description}">  </td>
+			<td th:text="${d.quantity}"> </td>
+			<td th:text="${d.dcreation}"> </td>
+			</tr>
+
+		
+
+
+			</tbody>	
+			  
+			</table>
+          
+       
+          <div class="margin_30"></div>
+            <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+              <span class="text-danger" id="mensaje_form"></span>
+            </div>
+          </div>
+         
+            <div class="margin_30"></div>
+         
+            
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4"></div>
+
+  </div>
+
+
+
+ <script   src="https://code.jquery.com/jquery-3.2.1.slim.min.js"   integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="   crossorigin="anonymous"></script>
+<script src="js/holder.min.js"></script>
+<script src="js/parallax.min.js"></script>
+      
+      
+
+<script>
+        $("#contrasenha2").keyup(function(){
+            	if ($("#contrasenha1").val() != $("#contrasenha2").val()){
+            		$(".passw").addClass("has-error")
+            	}
+            	else{
+            		$(".passw").removeClass("has-error");
+            		$(".passw").addClass("has-success")
+            	}
+            })
+            $("#login_button").click(function(e){
+            	if ($("#contrasenha1").val() != $("#contrasenha2").val()){
+            		e.preventDefault();
+            		$("#mensaje_form").html("Las contraseñas no coinciden!")
+            	}
+            	else{
+            		
+            	}
+            })
+            
+            </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
